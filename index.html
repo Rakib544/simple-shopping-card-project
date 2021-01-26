@@ -81,8 +81,7 @@
    <script>
 
       //declaring price value
-      const price = document.getElementById('price').innerText;
-      const priceNumber = parseInt(price);
+      const price = parseInt(document.getElementById('price').innerText);
 
       //declaring subtotal value
       const subtotal = parseInt(document.getElementById('sub-total').innerText);
@@ -93,30 +92,41 @@
 
       const incrementBtn = document.getElementById('increment-button');
       incrementBtn.addEventListener('click', () => {
-         let totalProduct = document.getElementById('total-product').value;
-         let totalProductNumber = parseInt(totalProduct);
-         totalProductNumber++;
-         document.getElementById('total-product').value = totalProductNumber;
-         
-         document.getElementById('price').innerText = totalProductNumber * priceNumber
-         const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProductNumber * priceNumber) - priceNumber
-         document.getElementById('total-price').innerText = subTotalValue;
+         increment();
       })
 
       const decrementBtn = document.getElementById('decrement-button');
       decrementBtn.addEventListener('click', () => {
-         let totalProduct = document.getElementById('total-product').value;
-         let totalProductNumber = parseInt(totalProduct);
-         totalProductNumber--;
-         if(totalProductNumber < 0) {
+        decrement();
+      })
+
+      //creating increment function
+
+      const increment = () => {
+         let totalProduct = parseInt( document.getElementById('total-product').value);
+         totalProduct++;
+         document.getElementById('total-product').value = totalProduct;
+         
+         document.getElementById('price').innerText = totalProduct * price
+         const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProduct * price) - price
+         document.getElementById('total-price').innerText = subTotalValue;
+      }
+
+      //creating decrement function
+
+      const decrement = () => {
+         let totalProduct = parseInt(document.getElementById('total-product').value);
+         totalProduct--;
+         if(totalProduct < 0) {
             alert("products can't be negative");
          } else {
-            document.getElementById('total-product').value = totalProductNumber;
-            document.getElementById('price').innerText = totalProductNumber * priceNumber
-            const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProductNumber * priceNumber) - priceNumber
+            document.getElementById('total-product').value = totalProduct;
+            document.getElementById('price').innerText = totalProduct * price
+            const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProduct * price) - price
             document.getElementById('total-price').innerText = subTotalValue;
          }
-      })
+      }
+
    </script>
 
 </body>
