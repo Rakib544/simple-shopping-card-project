@@ -35,7 +35,7 @@ body{
 .cart-item .form-control{
 	background-color: #F6F5FA;
 	border: none;
-    width: 50px;
+    width: 48px;
     border-radius: 10px!important;
     font-weight: 700;
     font-size: 20px;
@@ -52,4 +52,8 @@ body{
 	font-size: 19px;
 	background-color: #2FBE70;
 	border: none;
+}
+
+.price-width {
+	width: 30px;
 }
