@@ -84,13 +84,6 @@
       const price1 = parseInt(document.getElementById('price-1').innerText);
       const price2 = parseInt(document.getElementById('price-2').innerText);
 
-      //declaring subtotal value
-      const subtotal = parseInt(document.getElementById('sub-total').innerText);
-
-      //declaring total value 
-      const totalValue = parseInt(document.getElementById('total-price').innerText);
-
-
       const incrementBtn1 = document.getElementById('increment-button-1');
       incrementBtn1.addEventListener('click', () => {
          increment('total-product-1', price1, 'price-1');
@@ -112,31 +105,30 @@
       })
 
       //creating increment function
-
-      const increment = (products, price, priceId) => {
-         let totalProduct = parseInt( document.getElementById(products).value);
+      const increment = (productId, price, priceId) => {
+         let totalProduct = parseInt( document.getElementById(productId).value);
          totalProduct++;
-         document.getElementById(products).value = totalProduct;
+         document.getElementById(productId).value = totalProduct;
          document.getElementById(priceId).innerText = totalProduct * price
          calculateSubtotal();
       }
 
-      //creating decrement function
 
-      const decrement = (products, price, priceId) => {
-         let totalProduct = parseInt(document.getElementById(products).value);
+      //creating decrement function
+      const decrement = (productId, price, priceId) => {
+         let totalProduct = parseInt(document.getElementById(productId).value);
          totalProduct--;
          if(totalProduct < 0) {
             alert("products can't be negative");
          } else {
-            document.getElementById(products).value = totalProduct;
+            document.getElementById(productId).value = totalProduct;
             document.getElementById(priceId).innerText = totalProduct * price
             calculateSubtotal();
          }
       }
 
-      //creating subtotal calculating functionality
 
+      //creating subtotal calculating functionality
       const calculateSubtotal = () => {
          const firstProductPrice = parseInt(document.getElementById('price-1').innerText);
          const secondProductPrice = parseInt(document.getElementById('price-2').innerText);
