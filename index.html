@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="decrement-button" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="total-product" type="text" class="form-control text-center" value="1">
-                           <button id ="increment-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="decrement-button-1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="total-product-1" type="text" class="form-control text-center" value="1">
+                           <button id ="increment-button-1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$<span id="price">1219</span></h5>
+                        <h5>$<span id="price-1">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="decrement-button-2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="total-product-2" type="text" class="form-control text-center" value="1">
+                           <button id="increment-button-2" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$59</h5>
+                        <h5>$<span id="price-2">59</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -81,7 +81,8 @@
    <script>
 
       //declaring price value
-      const price = parseInt(document.getElementById('price').innerText);
+      const price1 = parseInt(document.getElementById('price-1').innerText);
+      const price2 = parseInt(document.getElementById('price-2').innerText);
 
       //declaring subtotal value
       const subtotal = parseInt(document.getElementById('sub-total').innerText);
@@ -90,41 +91,58 @@
       const totalValue = parseInt(document.getElementById('total-price').innerText);
 
 
-      const incrementBtn = document.getElementById('increment-button');
-      incrementBtn.addEventListener('click', () => {
-         increment();
+      const incrementBtn1 = document.getElementById('increment-button-1');
+      incrementBtn1.addEventListener('click', () => {
+         increment('total-product-1', price1, 'price-1');
       })
 
-      const decrementBtn = document.getElementById('decrement-button');
-      decrementBtn.addEventListener('click', () => {
-        decrement();
+      const decrementBtn1 = document.getElementById('decrement-button-1');
+      decrementBtn1.addEventListener('click', () => {
+        decrement('total-product-1', price1, 'price-1');
+      })
+
+      const incrementBtn2 = document.getElementById('increment-button-2');
+      incrementBtn2.addEventListener('click', () => {
+         increment('total-product-2', price2, 'price-2')
+      })
+
+      const decrementBtn2 = document.getElementById('decrement-button-2');
+      decrementBtn2.addEventListener('click', () => {
+         decrement('total-product-2', price2, 'price-2')
       })
 
       //creating increment function
 
-      const increment = () => {
-         let totalProduct = parseInt( document.getElementById('total-product').value);
+      const increment = (products, price, priceId) => {
+         let totalProduct = parseInt( document.getElementById(products).value);
          totalProduct++;
-         document.getElementById('total-product').value = totalProduct;
-         
-         document.getElementById('price').innerText = totalProduct * price
-         const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProduct * price) - price
-         document.getElementById('total-price').innerText = subTotalValue;
+         document.getElementById(products).value = totalProduct;
+         document.getElementById(priceId).innerText = totalProduct * price
+         calculateSubtotal();
       }
 
       //creating decrement function
 
-      const decrement = () => {
-         let totalProduct = parseInt(document.getElementById('total-product').value);
+      const decrement = (products, price, priceId) => {
+         let totalProduct = parseInt(document.getElementById(products).value);
          totalProduct--;
          if(totalProduct < 0) {
             alert("products can't be negative");
          } else {
-            document.getElementById('total-product').value = totalProduct;
-            document.getElementById('price').innerText = totalProduct * price
-            const subTotalValue = document.getElementById('sub-total').innerText = subtotal + (totalProduct * price) - price
-            document.getElementById('total-price').innerText = subTotalValue;
+            document.getElementById(products).value = totalProduct;
+            document.getElementById(priceId).innerText = totalProduct * price
+            calculateSubtotal();
          }
+      }
+
+      //creating subtotal calculating functionality
+
+      const calculateSubtotal = () => {
+         const firstProductPrice = parseInt(document.getElementById('price-1').innerText);
+         const secondProductPrice = parseInt(document.getElementById('price-2').innerText);
+
+         const subTotalValue = document.getElementById('sub-total').innerText = firstProductPrice + secondProductPrice
+         document.getElementById('total-price').innerText = subTotalValue;
       }
 
    </script>
