@@ -16,7 +16,7 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 col-sm-12 mx-auto">
-               <div class="cart-item">
+               <div id="card-1" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <div class="row d-flex align-items-center">
@@ -36,12 +36,12 @@
                            <button id ="increment-button-1" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5 class="price-width text-center mr-4">$<span id="price-1">1219</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img src="images/remove.png" alt="" class="remove-item" id="remove-button-1">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div id="card-2" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <div class="row d-flex align-items-center">
@@ -60,7 +60,7 @@
                            <button id="increment-button-2" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5 class="price-width mr-4">$<span id="price-2">59</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img src="images/remove.png" alt="" id="remove-button-2" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -146,6 +146,30 @@
 
          const subTotalValue = document.getElementById('sub-total').innerText = firstProductPrice + secondProductPrice
          document.getElementById('total-price').innerText = subTotalValue;
+      }
+
+
+      const deleteBtn1 = document.getElementById('remove-button-1');
+      deleteBtn1.addEventListener('click', () => {
+         deleteItem("price-1", "sub-total", "total-price", "card-1");
+         document.getElementById('price-1').innerText = "00";
+      })
+
+      const deleteBtn2 = document.getElementById('remove-button-2');
+      deleteBtn2.addEventListener('click', () => {
+         deleteItem("price-2", "sub-total", "total-price", "card-2")
+         document.getElementById('price-2').innerText = "00";
+      })
+
+
+       // creating removing card functionality
+      const deleteItem = (priceId, subTotalId, totalId, cardId) => {
+         const productPrice = parseInt(document.getElementById(priceId).innerText);
+         const subTotal = parseInt(document.getElementById(subTotalId).innerText);
+
+         document.getElementById(subTotalId).innerText = subTotal - productPrice;
+         document.getElementById(totalId).innerText = subTotal - productPrice;
+         document.getElementById(cardId).style.display = "none";
       }
 
    </script>
