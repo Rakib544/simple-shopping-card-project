@@ -98,45 +98,58 @@
 
       const incrementBtn1 = document.getElementById('increment-button-1');
       incrementBtn1.addEventListener('click', () => {
-         increment('total-product-1', price1, 'price-1');
+         handleIncrementDecrement(true, 'total-product-1', price1, 'price-1');
       })
 
       const decrementBtn1 = document.getElementById('decrement-button-1');
       decrementBtn1.addEventListener('click', () => {
-        decrement('total-product-1', price1, 'price-1');
+         handleIncrementDecrement(false, 'total-product-1', price1, 'price-1');
       })
 
       const incrementBtn2 = document.getElementById('increment-button-2');
       incrementBtn2.addEventListener('click', () => {
-         increment('total-product-2', price2, 'price-2')
+         handleIncrementDecrement(true, 'total-product-2', price2, 'price-2')
       })
 
       const decrementBtn2 = document.getElementById('decrement-button-2');
       decrementBtn2.addEventListener('click', () => {
-         decrement('total-product-2', price2, 'price-2')
+         handleIncrementDecrement(false, 'total-product-2', price2, 'price-2')
       })
 
-      //creating increment function
-      const increment = (productId, price, priceId) => {
-         let totalProduct = parseInt( document.getElementById(productId).value);
-         totalProduct++;
+      //creating increment and decrement function
+      const handleIncrementDecrement =  (isIncrease, productId, price, priceId) => {
+         let totalProduct = parseInt(document.getElementById(productId).value);
+         if(isIncrease === true) {
+            totalProduct++;
+         } else if(isIncrease === false && totalProduct > 0) {
+            totalProduct--;
+         }
          document.getElementById(productId).value = totalProduct;
-         document.getElementById(priceId).innerText = totalProduct * price
+         document.getElementById(priceId).innerText = totalProduct * price;
          calculateSubtotal();
       }
 
+      //creating increment function
+      // const increment = (productId, price, priceId) => {
+      //    let totalProduct = parseInt( document.getElementById(productId).value);
+      //    totalProduct++;
+      //    document.getElementById(productId).value = totalProduct;
+      //    document.getElementById(priceId).innerText = totalProduct * price
+      //    calculateSubtotal();
+      // }
+
       //creating decrement function
-      const decrement = (productId, price, priceId) => {
-         let totalProduct = parseInt(document.getElementById(productId).value);
-         totalProduct--;
-         if(totalProduct < 0) {
-            alert("products can't be negative");
-         } else {
-            document.getElementById(productId).value = totalProduct;
-            document.getElementById(priceId).innerText = totalProduct * price
-            calculateSubtotal();
-         }
-      }
+      // const decrement = (productId, price, priceId) => {
+      //    let totalProduct = parseInt(document.getElementById(productId).value);
+      //    totalProduct--;
+      //    if(totalProduct < 0) {
+      //       alert("products can't be negative");
+      //    } else {
+      //       document.getElementById(productId).value = totalProduct;
+      //       document.getElementById(priceId).innerText = totalProduct * price
+      //       calculateSubtotal();
+      //    }
+      // }
 
 
       //creating subtotal calculating functionality
